@@ -107,7 +107,7 @@ export default class AppClass extends React.Component {
           <button id="up" onClick={() => this.getNextIndex("up")}>UP</button>
           <button id="right" onClick={() => this.getNextIndex("right")}>RIGHT</button>
           <button id="down" onClick={() => this.getNextIndex("down")}>DOWN</button>
-          <button id="reset">reset</button>
+          <button id="reset" onClick={() => this.reset()}>reset</button>
         </div>
         <form>
           <input id="email" type="email" placeholder="type email" onChange={onChange} value={this.state.email}></input>
