@@ -22,14 +22,46 @@ export default function AppFunctional(props) {
   }
 
   function getNextIndex(direction) {
-    // This helper takes a direction ("left", "up", etc) and calculates what the next index
-    // of the "B" would be. If the move is impossible because we are at the edge of the grid,
-    // this helper should return the current index unchanged.
-  }
+    const x = coord.x;
+    const y = coord.y;
 
-  function move(evt) {
-    // This event handler can use the helper above to obtain a new index for the "B",
-    // and change any states accordingly.
+    if (direction === "up") {
+      if (y === 1) {
+        setMessage("You can't go up");
+      } else {
+        setCoord({...coord, "y": y - 1})
+        setMessage("");
+        setIndex(index - 3);
+        setSteps(steps + 1);
+      }
+    } else if (direction === "left") {
+      if (x === 1) {
+        setMessage("You can't go left");
+      } else {
+        setCoord({...coord, "x": x - 1});
+        setMessage("");
+        setIndex(index - 1);
+        setSteps(steps + 1);
+      }
+    } else if (direction === "down") {
+      if (y === 3) {
+        setMessage("You can't go down");
+      } else {
+        setCoord({...coord, "y": y + 1});
+        setMessage("");
+        setIndex(index + 3);
+        setSteps(steps + 1);
+      }
+    } else {
+      if (x === 3) {
+        setMessage("You can't go right");
+      } else {
+        setCoord({...coord, "x": x + 1})
+        setMessage("");
+        setIndex(index + 1);
+        setSteps(steps + 1);
+      }
+    }
   }
 
   function onChange(evt) {
@@ -49,8 +81,8 @@ export default function AppFunctional(props) {
       <div id="grid">
         {
           [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
-            <div key={idx} className={`square${idx === 4 ? ' active' : ''}`}>
-              {idx === 4 ? 'B' : null}
+            <div key={idx} className={`square${idx === index ? ' active' : ''}`}>
+              {idx === index ? 'B' : null}
             </div>
           ))
         }
@@ -59,11 +91,11 @@ export default function AppFunctional(props) {
         <h3 id="message"></h3>
       </div>
       <div id="keypad">
-        <button id="left">LEFT</button>
-        <button id="up">UP</button>
-        <button id="right">RIGHT</button>
-        <button id="down">DOWN</button>
-        <button id="reset">reset</button>
+        <button id="left" onClick={() => getNextIndex("left")}>LEFT</button>
+        <button id="up" onClick={() => getNextIndex("up")}>UP</button>
+        <button id="right" onClick={() => getNextIndex("right")}>RIGHT</button>
+        <button id="down" onClick={() => getNextIndex("down")}>DOWN</button>
+        <button id="reset" onClick={reset}>reset</button>
       </div>
       <form>
         <input id="email" type="email" placeholder="type email"></input>
