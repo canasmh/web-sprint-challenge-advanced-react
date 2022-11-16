@@ -77,12 +77,10 @@ export default function AppFunctional(props) {
     try {
       const res = await axios.post("http://localhost:9000/api/result", data)
       setMessage(res.data.message);
-
     } catch (err) {
-      console.log(`There was an error: ${err}`)
+      setMessage(err.response.data.message);
     }
-    
-    
+
     setEmail("");
   }
 
