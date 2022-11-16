@@ -7,7 +7,7 @@ export default class AppClass extends React.Component {
     this.state = {
       message: '',
       email: '',
-      steps: '',
+      steps: 0,
       index: 4,
       coord: {x: 2, y: 2}
     }
@@ -21,7 +21,7 @@ export default class AppClass extends React.Component {
     this.setState({
       message: '',
       email: '',
-      steps: '',
+      steps: 0,
       index: 4,
       coord: {x: 2, y: 2}
     })
@@ -109,7 +109,7 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">{this.getXYMessage()}</h3>
-          <h3 id="steps">You moved 0 times</h3>
+          <h3 id="steps">You moved {this.state.steps} times</h3>
         </div>
         <div id="grid">
           {
