@@ -64,12 +64,26 @@ export default function AppFunctional(props) {
     }
   }
 
-  function onChange(evt) {
-    // You will need this to update the value of the input.
-  }
+  async function onSubmit(evt) {
+    evt.preventDefault();
+    
+    const data = {
+      x: coord.x,
+      y: coord.y,
+      steps: steps,
+      email: email
+    }
+    
+    try {
+      const res = await axios.post("http://localhost:9000/api/result", data)
+      setMessage(res.data.message);
 
-  function onSubmit(evt) {
-    // Use a POST request to send a payload to the server.
+    } catch (err) {
+      console.log(`There was an error: ${err}`)
+    }
+    
+    
+    setEmail("");
   }
 
   return (
@@ -88,7 +102,7 @@ export default function AppFunctional(props) {
         }
       </div>
       <div className="info">
-        <h3 id="message"></h3>
+        <h3 id="message">{message}</h3>
       </div>
       <div id="keypad">
         <button id="left" onClick={() => getNextIndex("left")}>LEFT</button>
@@ -97,8 +111,8 @@ export default function AppFunctional(props) {
         <button id="down" onClick={() => getNextIndex("down")}>DOWN</button>
         <button id="reset" onClick={reset}>reset</button>
       </div>
-      <form>
-        <input id="email" type="email" placeholder="type email"></input>
+      <form onSubmit={onSubmit}>
+        <input id="email" type="email" placeholder="type email" value={email} onChange={(evt) => setEmail(evt.target.value)}></input>
         <input id="submit" type="submit"></input>
       </form>
     </div>
