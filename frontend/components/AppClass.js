@@ -96,9 +96,9 @@ export default class AppClass extends React.Component {
     const postURL = "http://localhost:9000/api/result"
     try {
       const res = await axios.post(postURL, postData);
-      this.setState({"message": res.data.message})
+      this.setState({"message": res.data.message, "email": ""})
     } catch (err) {
-      console.log(`There was an error: ${err}`)
+      this.setState({"message": err.response.data.message, "email": ""})
     }
     
   }
@@ -109,7 +109,7 @@ export default class AppClass extends React.Component {
       <div id="wrapper" className={className}>
         <div className="info">
           <h3 id="coordinates">{this.getXYMessage()}</h3>
-          <h3 id="steps">You moved {this.state.steps} times</h3>
+          <h3 id="steps">You moved {this.state.steps} {this.state.steps === 1 ? "time" : "times"}</h3>
         </div>
         <div id="grid">
           {
