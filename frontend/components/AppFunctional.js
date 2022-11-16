@@ -10,13 +10,15 @@ export default function AppFunctional(props) {
   const [coord, setCoord] = useState({x: 2, y: 2})
 
   function getXYMessage() {
-    // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
-    // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
-    // returns the fully constructed string.
+    return `Coordinates (${coord.x}, ${coord.y})`
   }
 
   function reset() {
-    // Use this helper to reset all states to their initial values.
+    setIndex(4);
+    setSteps(0);
+    setCoord({x: 2, y: 2})
+    setMessage("");
+    setEmail("");
   }
 
   function getNextIndex(direction) {
@@ -41,8 +43,8 @@ export default function AppFunctional(props) {
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates (2, 2)</h3>
-        <h3 id="steps">You moved 0 times</h3>
+        <h3 id="coordinates">{getXYMessage()}</h3>
+        <h3 id="steps">You moved {steps} times</h3>
       </div>
       <div id="grid">
         {
