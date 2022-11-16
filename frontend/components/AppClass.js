@@ -1,19 +1,16 @@
 import React from 'react'
 
-// Suggested initial states
-const initialMessage = ''
-const initialEmail = ''
-const initialSteps = 0
-const initialIndex = 4 // the index the "B" is at
-
-const initialState = {
-  message: initialMessage,
-  email: initialEmail,
-  index: initialIndex,
-  steps: initialSteps,
-}
-
 export default class AppClass extends React.Component {
+  constructor() {
+    super(props);
+    this.state = {
+      message: '',
+      email: '',
+      steps: '',
+      index: '',
+      coord: {x: 2, y: 2}
+    }
+  }
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
 
