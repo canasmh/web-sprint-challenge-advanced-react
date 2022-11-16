@@ -26,6 +26,13 @@ export default class AppClass extends React.Component {
   }
 
   reset = () => {
+    this.setState({
+      message: '',
+      email: '',
+      steps: '',
+      index: '',
+      coord: {x: 2, y: 2}
+    })
     // Use this helper to reset all states to their initial values.
   }
 
