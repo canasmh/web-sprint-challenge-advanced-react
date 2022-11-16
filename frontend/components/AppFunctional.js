@@ -1,19 +1,13 @@
-import React from 'react'
-
-// Suggested initial states
-const initialMessage = ''
-const initialEmail = ''
-const initialSteps = 0
-const initialIndex = 4 // the index the "B" is at
+import React, { useState } from 'react'
+import axios from 'axios'
 
 export default function AppFunctional(props) {
-  // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
-  // You can delete them and build your own logic from scratch.
 
-  function getXY() {
-    // It it not necessary to have a state to track the coordinates.
-    // It's enough to know what index the "B" is at, to be able to calculate them.
-  }
+  const [message, setMessage] = useState('')
+  const [email, setEmail] = useState('')
+  const [steps, setSteps] = useState(0)
+  const [index, setIndex] = useState(4) 
+  const [coord, setCoord] = useState({x: 2, y: 2})
 
   function getXYMessage() {
     // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
