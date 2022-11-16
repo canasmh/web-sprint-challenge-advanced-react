@@ -1,19 +1,19 @@
 import React from 'react'
 
 export default class AppClass extends React.Component {
-  constructor() {
+  constructor(props) {
     super(props);
     this.state = {
       message: '',
       email: '',
       steps: '',
-      index: '',
+      index: 4,
       coord: {x: 2, y: 2}
     }
   }
 
   getXYMessage = () => {
-    return `Coordinates (${coord.x}, ${coord.y})`
+    return `Coordinates (${this.state.coord.x}, ${this.state.coord.y})`
   }
 
   reset = () => {
@@ -21,7 +21,7 @@ export default class AppClass extends React.Component {
       message: '',
       email: '',
       steps: '',
-      index: '',
+      index: 4,
       coord: {x: 2, y: 2}
     })
   }
@@ -29,42 +29,52 @@ export default class AppClass extends React.Component {
   getNextIndex = (direction) => {
     const x = this.state.coord.x;
     const y = this.state.coord.y;
+    const steps = this.state.steps;
+    const index = this.state.index;
 
     if (direction === "up") {
       if (y === 1) {
-        setMessage("You can't go up");
+        this.setState({message: "You can't go up"});
       } else {
-        setCoord({...coord, "y": y - 1})
-        setMessage("");
-        setIndex(index - 3);
-        setSteps(steps + 1);
+        this.setState({
+          coord: {"x": x, "y": y - 1},
+          message: "",
+          index: index - 3,
+          steps: steps + 1
+        })
       }
     } else if (direction === "left") {
       if (x === 1) {
-        setMessage("You can't go left");
+        this.setState({message: "You can't go left"})
       } else {
-        setCoord({...coord, "x": x - 1});
-        setMessage("");
-        setIndex(index - 1);
-        setSteps(steps + 1);
+        this.setState({
+          coord: {"x": x - 1, "y": y},
+          message: "",
+          index: index - 1,
+          steps: steps + 1
+        })
       }
     } else if (direction === "down") {
       if (y === 3) {
-        setMessage("You can't go down");
+        this.setState({message: "You can't go down"})
       } else {
-        setCoord({...coord, "y": y + 1});
-        setMessage("");
-        setIndex(index + 3);
-        setSteps(steps + 1);
+        this.setState({
+          coord: {"x": x, "y": y + 1},
+          message: "",
+          index: index + 3,
+          steps: steps + 1
+        })
       }
     } else {
       if (x === 3) {
-        setMessage("You can't go right");
+        this.setState({message: "You can't go right"})
       } else {
-        setCoord({...coord, "x": x + 1})
-        setMessage("");
-        setIndex(index + 1);
-        setSteps(steps + 1);
+        this.setState({
+          coord: {"x": x + 1, "y": y},
+          message: "",
+          index: index + 1,
+          steps: steps + 1
+        })
       }
     }
   }
@@ -87,7 +97,7 @@ export default class AppClass extends React.Component {
     return (
       <div id="wrapper" className={className}>
         <div className="info">
-          <h3 id="coordinates">{this.getXY()}</h3>
+          <h3 id="coordinates">{this.getXYMessage()}</h3>
           <h3 id="steps">You moved 0 times</h3>
         </div>
         <div id="grid">
@@ -110,7 +120,7 @@ export default class AppClass extends React.Component {
           <button id="reset" onClick={() => this.reset()}>reset</button>
         </div>
         <form>
-          <input id="email" type="email" placeholder="type email" onChange={onChange} value={this.state.email}></input>
+          <input id="email" type="email" placeholder="type email" onChange={this.onChange} value={this.state.email}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
