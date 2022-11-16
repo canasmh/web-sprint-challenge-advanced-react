@@ -27,9 +27,46 @@ export default class AppClass extends React.Component {
   }
 
   getNextIndex = (direction) => {
-    // This helper takes a direction ("left", "up", etc) and calculates what the next index
-    // of the "B" would be. If the move is impossible because we are at the edge of the grid,
-    // this helper should return the current index unchanged.
+    const x = this.state.coord.x;
+    const y = this.state.coord.y;
+
+    if (direction === "up") {
+      if (y === 1) {
+        setMessage("You can't go up");
+      } else {
+        setCoord({...coord, "y": y - 1})
+        setMessage("");
+        setIndex(index - 3);
+        setSteps(steps + 1);
+      }
+    } else if (direction === "left") {
+      if (x === 1) {
+        setMessage("You can't go left");
+      } else {
+        setCoord({...coord, "x": x - 1});
+        setMessage("");
+        setIndex(index - 1);
+        setSteps(steps + 1);
+      }
+    } else if (direction === "down") {
+      if (y === 3) {
+        setMessage("You can't go down");
+      } else {
+        setCoord({...coord, "y": y + 1});
+        setMessage("");
+        setIndex(index + 3);
+        setSteps(steps + 1);
+      }
+    } else {
+      if (x === 3) {
+        setMessage("You can't go right");
+      } else {
+        setCoord({...coord, "x": x + 1})
+        setMessage("");
+        setIndex(index + 1);
+        setSteps(steps + 1);
+      }
+    }
   }
 
   move = (evt) => {
@@ -66,10 +103,10 @@ export default class AppClass extends React.Component {
           <h3 id="message"></h3>
         </div>
         <div id="keypad">
-          <button id="left">LEFT</button>
-          <button id="up">UP</button>
-          <button id="right">RIGHT</button>
-          <button id="down">DOWN</button>
+          <button id="left" onClick={() => this.getNextIndex("left")}>LEFT</button>
+          <button id="up" onClick={() => this.getNextIndex("up")}>UP</button>
+          <button id="right" onClick={() => this.getNextIndex("right")}>RIGHT</button>
+          <button id="down" onClick={() => this.getNextIndex("down")}>DOWN</button>
           <button id="reset">reset</button>
         </div>
         <form>
