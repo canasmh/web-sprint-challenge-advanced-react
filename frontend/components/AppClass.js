@@ -11,7 +11,7 @@ export default class AppClass extends React.Component {
       coord: {x: 2, y: 2}
     }
   }
-  
+
   getXYMessage = () => {
     return `Coordinates (${coord.x}, ${coord.y})`
   }
@@ -38,7 +38,7 @@ export default class AppClass extends React.Component {
   }
 
   onChange = (evt) => {
-    // You will need this to update the value of the input.
+    this.setState({email: evt.target.value});
   }
 
   onSubmit = (evt) => {
@@ -73,7 +73,7 @@ export default class AppClass extends React.Component {
           <button id="reset">reset</button>
         </div>
         <form>
-          <input id="email" type="email" placeholder="type email"></input>
+          <input id="email" type="email" placeholder="type email" onChange={onChange} value={this.state.email}></input>
           <input id="submit" type="submit"></input>
         </form>
       </div>
